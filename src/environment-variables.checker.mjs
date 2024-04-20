@@ -18,6 +18,6 @@ function checkHttpsConfig() {
 }
 
 function checkPort() {
-  if (isNaN(Number(process.env.PORT)))
+  if (Number.isNaN(process.env.PORT))
     throw new Error('PORT environment variable must be a number');
 }
