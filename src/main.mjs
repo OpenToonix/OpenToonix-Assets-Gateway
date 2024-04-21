@@ -9,7 +9,7 @@ import {
   shouldUseHttps
 } from './environment-variables.checker.mjs';
 
-import { logger } from './middlewares/logger.middleware.mjs';
+import { logger } from './shared/middlewares/logger.middleware.mjs';
 
 const port = process.env.PORT || 80;
 

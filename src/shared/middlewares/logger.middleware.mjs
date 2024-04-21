@@ -1,4 +1,4 @@
-import { ConsoleLogger } from '../loggers/console.logger.mjs';
+import { ConsoleLogger } from '../../loggers/console.logger.mjs';
 
 export function logger(request, response, next) {
   const consoleLogger = ConsoleLogger.getLogger(logger.name);
