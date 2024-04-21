@@ -1,0 +1,60 @@
+# GitHub
+.github/
+
+# Code editor directories
+.idea/
+.vscode/
+
+# Dependency directories
+node_modules/
+
+# Docker
+.dockerignore
+Dockerfile
+docker-compose*
+
+# Documentation
+CHANGELOG.md
+LICENSE
+README.md
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Editorconfig
+.editorconfig
+
+# ESLint
+.eslintcache
+.eslintrc*
+eslint.config*
+
+# Git
+.git/
+.gitignore
+
+# Logs
+logs
+*.log
+npm-debug.log*
+.pnpm-debug.log*
+
+# Optional NPM cache directory
+.npm/
+
+# Optional REPL history
+.node_repl_history
+
+# Prettier
+.prettierrc*
+
+# Serverless directories
+.serverless/
+
+# Uncategorised
+*.dccache
+*.DS_Store

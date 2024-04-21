@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  assets-gateway:
+    image: opentoonix-assets-gateway
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: opentoonix-assets-gateway
+    environment:
+      HTTPS_CERT_FILEPATH: ${HTTPS_CERT_FILEPATH}
+      HTTPS_KEY_FILEPATH: ${HTTPS_KEY_FILEPATH}
+      NODE_ENV: production
+      PORT: ${PORT}
+      SHOULD_USE_HTTPS: ${SHOULD_USE_HTTPS}
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ${LOCAL_HTTPS_CERT_FILEPATH}:${HTTPS_CERT_FILEPATH}:ro
+      - ${LOCAL_HTTPS_KEY_FILEPATH}:${HTTPS_KEY_FILEPATH}:ro

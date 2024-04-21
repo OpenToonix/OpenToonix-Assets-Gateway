@@ -1,0 +1,64 @@
+name: Deliver Application
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_run:
+    types:
+      - completed
+    workflows:
+      - Check Linter Errors
+
+jobs:
+  create-release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - run: mkdir build
+      - run: mv public/ build
+      - run: mv src/ build
+      - name: Zip application
+        uses: vimtor/action-zip@v1.1
+        with:
+          dest: opentoonix-assets-gateway-${{ github.ref_name }}.zip
+          files: build package.json pnpm-lock.yaml
+      - name: Release application
+        uses: softprops/action-gh-release@v1
+        with:
+          body: Version ${{ github.ref_name }} of the application
+          body_path: ./CHANGELOG.md
+          files: |
+            opentoonix-assets-gateway-${{ github.ref_name }}.zip
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+
+  push-docker-image:
+    name: Push Docker Image
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/v')
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve major version
+        id: major-version
+        run: echo ::set-output name=major-version::${GITHUB_REF#refs/tags/v}
+      - name: Log in to registry
+        uses: docker/login-action@v3
+        with:
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+      - name: Build and push the Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_REGISTRY }}:${{ github.ref_name }},${{ secrets.DOCKERHUB_REGISTRY }}:latest
