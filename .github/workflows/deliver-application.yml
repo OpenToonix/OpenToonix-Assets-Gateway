@@ -53,7 +53,7 @@ jobs:
         with:
           msg: ${{ github.ref_name }}
           separator: .
-      - run: echo ${{ steps.split.outputs }}
+      - run: echo ${{ steps.split.outputs._0 }}
       - name: Log in to registry
         uses: docker/login-action@v3
         with:
