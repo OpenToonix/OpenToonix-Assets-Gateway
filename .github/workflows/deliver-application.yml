@@ -48,8 +48,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Retrieve major version
-        id: major-version
-        run: echo ::set-output name=major-version::${GITHUB_REF#refs/tags/v}
+        id: split
+        run: echo major-version=${GITHUB_REF#refs/tags/v} >> $GITHUB_OUTPUT
+      - run: echo ${{ steps.split.outputs.major-version }}
       - name: Log in to registry
         uses: docker/login-action@v3
         with:
@@ -61,4 +62,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_REGISTRY }}:${{ github.ref_name }},${{ secrets.DOCKERHUB_REGISTRY }}:latest
+          tags: ${{ secrets.DOCKERHUB_REGISTRY }}:${{ steps.split.outputs.major-version }},${{ secrets.DOCKERHUB_REGISTRY }}:${{ github.ref_name }},${{ secrets.DOCKERHUB_REGISTRY }}:latest
