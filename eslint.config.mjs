@@ -14,6 +14,21 @@ const compat = new FlatCompat({
 });
 
 export default [
-  { languageOptions: { globals: globals.node } },
-  ...compat.extends('plugin:prettier/recommended', '.eslintrc.js')
+  {
+    ignores: ['public/'],
+    languageOptions: { globals: globals.node },
+    rules: {
+      'linebreak-style': ['error', 'unix'],
+      'no-console': 'error',
+      'no-undef': 'error',
+      'no-unused-vars': 'error',
+      'no-var': 'error',
+      'prefer-const': 'error',
+      'prefer-destructuring': 'error',
+      'prefer-template': 'error',
+      quotes: ['error', 'single'],
+      semi: ['error', 'always']
+    }
+  },
+  ...compat.extends('plugin:prettier/recommended')
 ];
