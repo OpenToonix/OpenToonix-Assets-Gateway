@@ -20,9 +20,50 @@ environmentVariablesChecker();
 
 app.disable('x-powered-by');
 
+app.set('view engine', 'ejs');
+
 app.use(logger);
 
 app.use('/', express.static(resolve('public')));
+
+app.get('/', async (req, res) => {
+  let languageConfig = null;
+
+  const language = req.query.lang || 'en';
+  const templateParameters = {
+    authentication: null,
+    avatar: '',
+    cdnPath: process.env.CDN_PATH,
+    httpServerAddress: process.env.HTTP_SERVER_ADDRESS,
+    lang: language,
+    searcherPlaceholder: '',
+    title: '',
+    wantToCreateMyToonix: '',
+    welcomeForeigner: ''
+  };
+
+  try {
+    languageConfig = (await import(`./config/i18n/${language}.mjs`)).default;
+  } catch (error) {
+    ConsoleLogger.getLogger('main').error(error);
+
+    languageConfig = (await import('./config/i18n/en.mjs')).default;
+
+    templateParameters.lang = 'en';
+  }
+
+  if (!templateParameters.lang) templateParameters.lang = language;
+
+  res.render('index', {
+    ...templateParameters,
+    authentication: languageConfig.authentication,
+    avatar: languageConfig.mainPage.avatar,
+    searcherPlaceholder: languageConfig.mainPage.search,
+    title: languageConfig.mainPage.title,
+    wantToCreateMyToonix: languageConfig.authentication.wantToCreateMyToonix,
+    welcomeForeigner: languageConfig.authentication.welcomeForeigner
+  });
+});
 
 if (shouldUseHttps()) {
   import('node:https')
