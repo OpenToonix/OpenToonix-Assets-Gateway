@@ -15,7 +15,6 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['public/'],
     languageOptions: { globals: globals.node },
     rules: {
       'linebreak-style': ['error', 'unix'],
@@ -29,6 +28,9 @@ export default [
       quotes: ['error', 'single'],
       semi: ['error', 'always']
     }
+  },
+  {
+    ignores: ['public/']
   },
   ...compat.extends('plugin:prettier/recommended')
 ];
