@@ -10,6 +10,9 @@ export function shouldUseHttps() {
 function checkHttpsConfig() {
   if (!shouldUseHttps()) return;
 
+  if (!process.env.HTTPS_CA_FILEPATH)
+    throw new Error('HTTPS_CA_FILEPATH environment variable must be set');
+
   if (!process.env.HTTPS_CERT_FILEPATH)
     throw new Error('HTTPS_CERT_FILEPATH environment variable must be set');
 

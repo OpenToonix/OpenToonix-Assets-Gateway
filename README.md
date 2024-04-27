@@ -8,12 +8,13 @@ Gateway for static assets from Toonix World _(mostly known as **Mundo Toonix**)_
 - **[PNPM](https://pnpm.io/)** - Version 8.x
 - **Environment variables**
 
-    | Variable              | Type    | Description                      | Default | Example                     | Required                                                               |
-    | --------------------- | ------- | -------------------------------- | ------- | --------------------------- | ---------------------------------------------------------------------- |
-    | `HTTPS_CERT_FILEPATH` | String  | Path to the SSL certificate file | None    | `<Path to SSL certificate>` | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` |
-    | `HTTPS_KEY_FILEPATH`  | String  | Path to the SSL key file         | None    | `<Path to SSL key>`         | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` |
-    | `PORT`                | Number  | Port to run the server           | 80      | `3000`                      | No                                                                     |
-    | `SHOULD_USE_HTTPS`    | Boolean | Use HTTPS protocol               | None    | `true`                      | No                                                                     |
+    | Variable              | Type    | Description                      | Default | Required                                                               | Example                     |
+    | --------------------- | ------- | -------------------------------- | ------- | ---------------------------------------------------------------------- | --------------------------- |
+    | `HTTPS_CA_FILEPATH`   | String  | Path to the SSL CA file          | None    | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` | `<Path to SSL CA>`          |
+    | `HTTPS_CERT_FILEPATH` | String  | Path to the SSL certificate file | None    | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` | `<Path to SSL certificate>` |
+    | `HTTPS_KEY_FILEPATH`  | String  | Path to the SSL key file         | None    | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` | `<Path to SSL key>`         |
+    | `PORT`                | Number  | Port to run the server           | 80      | No                                                                     | `3000`                      |
+    | `SHOULD_USE_HTTPS`    | Boolean | Use HTTPS protocol               | None    | No                                                                     | `true`                      |
 
 ### Development Tools
 

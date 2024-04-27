@@ -70,10 +70,11 @@ if (shouldUseHttps()) {
     .then(({ createServer }) => {
       import('node:fs')
         .then(({ readFileSync }) => {
+          const ca = readFileSync(process.env.HTTPS_CA_FILEPATH);
           const cert = readFileSync(process.env.HTTPS_CERT_FILEPATH);
           const key = readFileSync(process.env.HTTPS_KEY_FILEPATH);
 
-          createServer({ cert, key }, app).listen(port);
+          createServer({ ca, cert, key }, app).listen(port);
 
           ConsoleLogger.getLogger('main').info(
             `${runningLogBaseMessage} ${port} with HTTPS`
