@@ -64,4 +64,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_REGISTRY }}:${{ github.ref_name }},${{ secrets.DOCKERHUB_REGISTRY }}:${{ steps.split.outputs._0 }},${{ secrets.DOCKERHUB_REGISTRY }}:latest
+          tags: ${{ secrets.DOCKERHUB_REPOSITORY }}:${{ github.ref_name }},${{ secrets.DOCKERHUB_REPOSITORY }}:${{ steps.split.outputs._0 }},${{ secrets.DOCKERHUB_REPOSITORY }}:latest
