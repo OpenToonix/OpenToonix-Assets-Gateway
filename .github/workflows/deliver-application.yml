@@ -49,7 +49,7 @@ jobs:
       matrix:
         platforms:
           - linux/amd64
-          - linux/arm64
+          - linux/arm64/v8
     steps:
       - uses: actions/checkout@v4
       - name: Retrieve major version
