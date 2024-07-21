@@ -10,6 +10,8 @@ Gateway for static assets from Toonix World _(mostly known as **Mundo Toonix**)_
 
     | Variable              | Type    | Description                      | Default | Required                                                               | Example                     |
     |-----------------------|---------|----------------------------------|---------|------------------------------------------------------------------------|-----------------------------|
+    | `CDN_PATH`            | String  | Path to the CDN                  | None    | Yes                                                                    | `https://cdn.toonix.com`    |
+    | `HTTP_SERVER_ADDRESS` | String  | Address to HTTP server           | None    | Yes                                                                    | `https://toonix.com`        |
     | `HTTPS_CA_FILEPATH`   | String  | Path to the SSL CA file          | None    | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` | `<Path to SSL CA>`          |
     | `HTTPS_CERT_FILEPATH` | String  | Path to the SSL certificate file | None    | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` | `<Path to SSL certificate>` |
     | `HTTPS_KEY_FILEPATH`  | String  | Path to the SSL key file         | None    | Yes, when the environment variable `SHOULD_USE_HTTPS` is set to `true` | `<Path to SSL key>`         |
